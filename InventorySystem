@@ -1,0 +1,43 @@
+slots = {
+    1: "Empty",
+    2: "Empty",
+    3: "Empty"
+}
+availabe_commands = ["SET", "VIEW", "SWAP"]
+title = """
+ _____                     _                     _____           _                 
+|_   _|                   | |                   /  ___|         | |                
+  | | _ ____   _____ _ __ | |_ ___  _ __ _   _  \ `--. _   _ ___| |_ ___ _ __ ___  
+  | || '_ \ \ / / _ \ '_ \| __/ _ \| '__| | | |  `--. \ | | / __| __/ _ \ '_ ` _ \ 
+ _| || | | \ V /  __/ | | | || (_) | |  | |_| | /\__/ / |_| \__ \ ||  __/ | | | | |
+ \___/_| |_|\_/ \___|_| |_|\__\___/|_|   \__, | \____/ \__, |___/\__\___|_| |_| |_|
+   43 lines of code, including this title __/ |         __/ |  v1.0.1 by Mitch Naake              
+-----------------------------------------|___/---------|___/------------------------                                         
+"""
+print(title)
+def invSystem():
+    try:
+        command = input("\n--------------------------------------\nPlease enter a command\n> ")
+        if command.upper() == "SET":
+            cSlot = int(input("Please enter a slot [1, 2, 3]\n> "))
+            slotItem = input("Please enter the item that you want to put in that slot\n> ")
+            slots[cSlot] = slotItem
+            print(("Successfully put {} in Slot_{}.").format(slots[cSlot], cSlot))
+        if command.upper() == "VIEW":
+            print(("Inventory slots are as follows:\n {}, {}, {}").format(slots[1], slots[2], slots[3]))
+        if command.upper() == "SWAP":
+            cSlot1 = int(input("Please enter a slot [1, 2, 3]\n> "))
+            cSlot2 = int(input("Please enter a slot [1, 2, 3]\n> "))
+            donorSlot = slots[cSlot2]
+            slots[cSlot2] = slots[cSlot1]
+            slots[cSlot1] = donorSlot
+        elif command.upper() not in availabe_commands:
+            input("Unknown command, HELP for help. [PRESS ENTER]")
+    except Exception as e:
+        print("An error has ocurred,", e)
+        invSystem()
+while True:
+    try:
+        invSystem()
+    except Exception as e:
+        print("An exception has ocurred: "+e)
